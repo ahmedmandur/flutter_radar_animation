@@ -4,6 +4,10 @@ A highly customizable Flutter package for creating beautiful radar sweep animati
 
 [![pub package](https://img.shields.io/pub/v/flutter_radar_animation.svg)](https://pub.dev/packages/flutter_radar_animation)
 
+## Live Demo
+
+Try out the interactive demo at [https://ahmedmandur.github.io/flutter_radar_animation/](https://ahmedmandur.github.io/flutter_radar_animation/)
+
 ## Features
 
 - Multiple sweep styles (line, gradient, dotted, double)
