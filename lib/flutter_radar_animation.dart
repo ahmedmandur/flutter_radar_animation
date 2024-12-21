@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 enum RadarSweepStyle {
   /// Standard rotating line
   line,
+
   /// Gradient sweep
   gradient,
+
   /// Dotted line
   dotted,
+
   /// Double line
   double,
 }
@@ -19,39 +22,84 @@ enum RadarSweepStyle {
 enum RadarShape {
   /// Circular radar
   circle,
+
   /// Square radar
   square,
+
   /// Octagon radar
   octagon,
 }
 
 /// RadarAnimation is a customizable widget that displays various radar sweep animations
 class RadarAnimation extends StatefulWidget {
+  /// The size of the radar animation.
   final double size;
+
+  /// The color of the sweep in the radar animation.
   final Color sweepColor;
+
+  /// The background color of the radar animation.
   final Color backgroundColor;
+
+  /// The duration of the radar animation.
   final Duration duration;
+
+  /// The width of the sweep in the radar animation.
   final double sweepWidth;
+
+  /// Whether to show circles in the radar animation.
   final bool showCircles;
+
+  /// The number of circles to show in the radar animation.
   final int numberOfCircles;
+
+  /// The color of the circles in the radar animation.
   final Color circleColor;
+
+  /// The style of the sweep in the radar animation.
   final RadarSweepStyle sweepStyle;
+
+  /// The shape of the radar.
   final RadarShape radarShape;
+
+  /// Whether to reverse the direction of the sweep.
   final bool reverse;
+
+  /// The spacing between dots in the dotted sweep style.
   final double dotSpacing;
+
+  /// The size of the dots in the dotted sweep style.
   final double dotSize;
+
+  /// Whether to show a center dot in the radar animation.
   final bool showCenterDot;
+
+  /// The color of the center dot in the radar animation.
   final Color centerDotColor;
+
+  /// The size of the center dot in the radar animation.
   final double centerDotSize;
+
+  /// The colors of the gradient in the gradient sweep style.
   final List<Color>? gradientColors;
+
+  /// Whether to apply a pulse effect to the radar animation.
   final bool pulseEffect;
+
+  /// The duration of the pulse effect.
   final Duration? pulseDuration;
+
+  /// The scale of the pulse effect.
   final double pulseScale;
+
+  /// Whether to fade the edges of the sweep.
   final bool fadeEdges;
+
+  /// The intensity of the fade effect.
   final double fadeIntensity;
 
   const RadarAnimation({
-    Key? key,
+    super.key,
     this.size = 200,
     this.sweepColor = Colors.green,
     this.backgroundColor = Colors.black,
@@ -74,13 +122,14 @@ class RadarAnimation extends StatefulWidget {
     this.pulseScale = 1.2,
     this.fadeEdges = false,
     this.fadeIntensity = 0.5,
-  }) : super(key: key);
+  });
 
   @override
   State<RadarAnimation> createState() => _RadarAnimationState();
 }
 
-class _RadarAnimationState extends State<RadarAnimation> with SingleTickerProviderStateMixin {
+class _RadarAnimationState extends State<RadarAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   Animation<double>? _pulseAnimation;
 
@@ -225,7 +274,8 @@ class RadarPainter extends CustomPainter {
 
   void _drawRadarShape(Canvas canvas, Offset center, double radius) {
     final shapePaint = Paint()
-      ..color = circleColor.withOpacity(0.3)
+      ..color = Color.fromRGBO(
+          circleColor.red, circleColor.green, circleColor.blue, 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -263,7 +313,8 @@ class RadarPainter extends CustomPainter {
 
   void _drawCircles(Canvas canvas, Offset center, double radius) {
     final circlePaint = Paint()
-      ..color = circleColor.withOpacity(0.3)
+      ..color = Color.fromRGBO(
+          circleColor.red, circleColor.green, circleColor.blue, 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -285,7 +336,7 @@ class RadarPainter extends CustomPainter {
   }
 
   void _drawSweep(Canvas canvas, Offset center, double radius) {
-    final startAngle = -math.pi / 2;
+    const startAngle = -math.pi / 2;
     final sweepAngle = 2 * math.pi * progress;
 
     switch (sweepStyle) {
@@ -314,9 +365,11 @@ class RadarPainter extends CustomPainter {
     if (fadeEdges) {
       sweepPaint.shader = RadialGradient(
         colors: [
-          sweepColor.withOpacity(1 - fadeIntensity),
+          Color.fromRGBO(sweepColor.red, sweepColor.green, sweepColor.blue,
+              1 - fadeIntensity),
           sweepColor,
-          sweepColor.withOpacity(1 - fadeIntensity),
+          Color.fromRGBO(sweepColor.red, sweepColor.green, sweepColor.blue,
+              1 - fadeIntensity),
         ],
         stops: const [0.0, 0.5, 1.0],
       ).createShader(Rect.fromCircle(center: center, radius: radius));
@@ -334,8 +387,8 @@ class RadarPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..shader = SweepGradient(
         colors: [
-          ...colors.map((c) => c.withOpacity(0.0)),
-          ...colors.map((c) => c.withOpacity(0.5)),
+          ...colors.map((c) => Color.fromRGBO(c.red, c.green, c.blue, 0.0)),
+          ...colors.map((c) => Color.fromRGBO(c.red, c.green, c.blue, 0.5)),
         ],
         stops: List.generate(
           colors.length * 2,
@@ -372,8 +425,7 @@ class RadarPainter extends CustomPainter {
       ..strokeWidth = sweepWidth;
 
     final rect = Rect.fromCircle(center: center, radius: radius);
-    canvas.drawArc(
-        rect, startAngle + sweepAngle, 0.1, false, sweepPaint);
+    canvas.drawArc(rect, startAngle + sweepAngle, 0.1, false, sweepPaint);
     canvas.drawArc(
         rect, startAngle + sweepAngle + math.pi, 0.1, false, sweepPaint);
   }

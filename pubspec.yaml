@@ -1,7 +1,7 @@
 name: flutter_radar_animation
 
 description: A customizable Flutter package for radar sweep animations with various styles, including gradients, shapes, and pulse effects.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/ahmedmandur/flutter_radar_animation
 repository: https://github.com/ahmedmandur/flutter_radar_animation
 issue_tracker: https://github.com/ahmedmandur/flutter_radar_animation/issues
