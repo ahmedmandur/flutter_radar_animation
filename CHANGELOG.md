@@ -1,3 +1,9 @@
+## 1.0.1
+
+* Fix deprecated `withOpacity` usage
+* Improve code formatting and documentation
+* Add automated publishing workflow
+
 ## 1.0.0
 
 Initial release with the following features:
