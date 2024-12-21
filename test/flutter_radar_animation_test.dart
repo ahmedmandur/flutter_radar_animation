@@ -147,6 +147,7 @@ void main() {
               size: 200,
               sweepColor: Colors.blue,
               backgroundColor: Colors.black,
+              pulseEffect: true,  // Enable pulse effect
             ),
           ),
         ),
@@ -154,9 +155,26 @@ void main() {
 
       expect(find.byType(RadarAnimation), findsOneWidget);
 
-      final animatedBuilders = find.byType(AnimatedBuilder);
-      expect(animatedBuilders,
-          findsNWidgets(3)); // One for radar, one for circles, one for pulse
+      // Find the RadarAnimation widget
+      final radarAnimation = find.byType(RadarAnimation);
+      
+      // Find AnimatedBuilder widgets that are descendants of RadarAnimation
+      final animatedBuilders = find.descendant(
+        of: radarAnimation,
+        matching: find.byType(AnimatedBuilder),
+      );
+      
+      // Find ScaleTransition widgets that are descendants of RadarAnimation
+      final scaleTransitions = find.descendant(
+        of: radarAnimation,
+        matching: find.byType(ScaleTransition),
+      );
+      
+      // Expect one AnimatedBuilder for the radar animation
+      expect(animatedBuilders, findsOneWidget);
+      
+      // Expect one ScaleTransition for the pulse effect
+      expect(scaleTransitions, findsOneWidget);
     });
   });
 
