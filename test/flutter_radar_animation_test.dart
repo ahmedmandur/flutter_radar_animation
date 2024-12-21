@@ -70,9 +70,10 @@ void main() {
       );
 
       expect(find.byType(RadarAnimation), findsOneWidget);
-      
+
       final scaleTransitions = find.byType(ScaleTransition);
-      expect(scaleTransitions, findsNWidgets(2)); // One for radar, one for pulse
+      expect(
+          scaleTransitions, findsNWidgets(2)); // One for radar, one for pulse
     });
 
     testWidgets('Sweep Styles Test', (WidgetTester tester) async {
@@ -91,7 +92,7 @@ void main() {
       );
 
       expect(find.byType(RadarAnimation), findsOneWidget);
-      
+
       final customPaints = find.byType(CustomPaint);
       expect(customPaints, findsNWidgets(2)); // One for radar, one for circles
     });
@@ -111,7 +112,7 @@ void main() {
       );
 
       expect(find.byType(RadarAnimation), findsOneWidget);
-      
+
       final customPaints = find.byType(CustomPaint);
       expect(customPaints, findsNWidgets(2)); // One for radar, one for circles
     });
@@ -132,9 +133,10 @@ void main() {
       );
 
       expect(find.byType(RadarAnimation), findsOneWidget);
-      
+
       final scaleTransitions = find.byType(ScaleTransition);
-      expect(scaleTransitions, findsNWidgets(2)); // One for radar, one for pulse
+      expect(
+          scaleTransitions, findsNWidgets(2)); // One for radar, one for pulse
     });
 
     testWidgets('Animation Controller Test', (WidgetTester tester) async {
@@ -151,9 +153,10 @@ void main() {
       );
 
       expect(find.byType(RadarAnimation), findsOneWidget);
-      
+
       final animatedBuilders = find.byType(AnimatedBuilder);
-      expect(animatedBuilders, findsNWidgets(3)); // One for radar, one for circles, one for pulse
+      expect(animatedBuilders,
+          findsNWidgets(3)); // One for radar, one for circles, one for pulse
     });
   });
 
